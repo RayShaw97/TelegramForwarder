@@ -27,6 +27,7 @@ class ForwardRule(Base):
     id = Column(Integer, primary_key=True)
     source_chat_id = Column(Integer, ForeignKey('chats.id'), nullable=False)
     target_chat_id = Column(Integer, ForeignKey('chats.id'), nullable=False)
+    target_topic_id = Column(Integer, nullable=True)
     forward_mode = Column(Enum(ForwardMode), nullable=False, default=ForwardMode.BLACKLIST)
     use_bot = Column(Boolean, default=True)
     message_mode = Column(Enum(MessageMode), nullable=False, default=MessageMode.MARKDOWN)
@@ -365,6 +366,7 @@ def migrate_db(engine):
         'enable_only_push': 'ALTER TABLE forward_rules ADD COLUMN enable_only_push BOOLEAN DEFAULT FALSE',
         'media_allow_text': 'ALTER TABLE forward_rules ADD COLUMN media_allow_text BOOLEAN DEFAULT FALSE',
         'enable_ai_upload_image': 'ALTER TABLE forward_rules ADD COLUMN enable_ai_upload_image BOOLEAN DEFAULT FALSE',
+        'target_topic_id': 'ALTER TABLE forward_rules ADD COLUMN target_topic_id INTEGER DEFAULT NULL',
     }
 
     keywords_new_columns = {
