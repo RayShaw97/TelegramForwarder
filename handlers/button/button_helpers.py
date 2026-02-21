@@ -404,7 +404,8 @@ async def create_media_types_buttons(rule_id, media_types):
         'document': '📄 文档',
         'video': '🎬 视频',
         'audio': '🎵 音频',
-        'voice': '🎤 语音'
+        'voice': '🎤 语音',
+        'sticker': '🎭 贴纸'
     }
     
     for field, display_name in media_type_names.items():
